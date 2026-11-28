@@ -35,12 +35,20 @@ bash scripts/run_baseline.sh U1 0 0          # U0, U1, THS, H-S, H-U, C-S, C-U,
 # HDT-M full 15 folds (teachers -> fused targets -> student), resume-safe
 bash scripts/hdtm_run_formal.sh
 
-# completion check (weights + result + OOF ids + config + teacher caches)
-python tools/check_status.py --runs "$SSR_ASSETS/m1_hdt_runs/hdtm_s*_f*" --recompute --teacher-guard
+# historical metrics and inference status for the exact 15 expected units
+python tools/check_status.py --experiment HDT-M --recompute
+# new versioned training outputs (independent of historical runs)
+python tools/check_status.py --experiment HDT-M --version v0.1.2-hdtm-ready --recompute
 ```
 
 All model code is imported from `src/`; the old `m1_*_gate` directories are historical copies and are
 never used by the entrypoints. See `docs/SOURCE_MAP.md` for model → source → origin.
+The experiment registry is `experiments/registry.json`. `METRICS_VERIFIED` means the complete OOF
+matches its fold manifest and stored metrics; `INFERENCE_READY` means a loadable readout checkpoint;
+`RUN_COMPLETE` requires both plus a valid configuration and, for HDT-M, valid teacher caches.
+Historical AAN, SUP6 and UUL6 may have verified metrics while lacking inference weights.
+Use `--metrics-only` when auditing historical metrics. `SSR_RUN_VERSION` selects the new output
+directory under `$SSR_ASSETS/m1_runs_unified/`.
 
 ## Baselines
 

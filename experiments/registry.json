@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "new_version": "v0.1.2-hdtm-ready",
+  "common_config": {"steps": 3200, "batch_size": 16, "lr": 0.00001, "layer_decay": 0.75, "readout_steps": 96},
+  "models": {
+    "HDT-M": {"protocol": "formal15", "historical": "m1_hdt_runs/hdtm_s{s}_f{f}", "arm": "hdtm", "lam": 0.25, "teacher_guard": true},
+    "H-S": {"protocol": "formal15", "historical": "m1_hist_runs/hs_s{s}_f{f}", "arm": "hs"},
+    "H-U": {"protocol": "formal15", "historical": "m1_hist_runs/hu_s{s}_f{f}", "arm": "hu"},
+    "U0": {"protocol": "formal15", "historical": "m1_uul_runs/U0_s{s}_f{f}", "arm": "raw", "new_arm": "off", "lambda_u": 0.0},
+    "U1": {"protocol": "formal15", "historical": "m1_uul_runs/U1_s{s}_f{f}", "arm": "raw", "lambda_u": 0.25},
+    "HPL": {"protocol": "formal15", "historical": "m1_hpl_runs/HPL_s{s}_f{f}", "implementation": "HPL official mechanism ported to EmoBank 3D (heteroscedastic weights + bilevel)"},
+    "RCUS": {"protocol": "formal15", "historical": "m1_rcus_runs/RCUS2_s{s}_f{f}", "implementation": "SSR-RCUS-3D official mechanism (Eq.3-5,8), scalar rank head per dim"},
+    "AAN": {"protocol": "formal15", "historical": "m1_aan_runs/aan_s{s}_f{f}", "implementation": "AAN-style reimplementation"},
+    "SUP6": {"protocol": "formal15", "historical": "m1_shallow_runs/sup6_s{s}_f{f}", "arm": "sup6", "n_layers": 6},
+    "UUL6": {"protocol": "formal15", "historical": "m1_shallow_runs/uul6_s{s}_f{f}", "arm": "uul6", "n_layers": 6},
+    "T-HS": {"protocol": "development3", "historical": "m1_hdt_runs/ths_s{s}_f{f}", "arm": "raw"},
+    "HDT-D": {"protocol": "development3", "historical": "m1_hdt_runs/hdtd_s{s}_f{f}", "arm": "hdtd"},
+    "C-S": {"protocol": "development3", "historical": "m1_hist_runs/cs_s{s}_f{f}", "arm": "cs"},
+    "C-U": {"protocol": "development3", "historical": "m1_hist_runs/cu_s{s}_f{f}", "arm": "cu"}
+  },
+  "protocol_units": {"formal15": [[0,0],[0,1],[0,2],[0,3],[0,4],[1,0],[1,1],[1,2],[1,3],[1,4],[2,0],[2,1],[2,2],[2,3],[2,4]], "development3": [[0,1],[1,2],[2,3]]},
+  "new_run_template": "m1_runs_unified/{version}/{model}_s{s}_f{f}",
+  "rankup": {
+    "RankUp-3D-v2": {"protocol": "formal15", "version": "v2", "run_template": "Semi-Supervised-Regression-rankup-m1/outputs/rankup_m1_v2/off_b3v2_seed{s}_fold{f}", "score": "sup96/oof_predictions.parquet", "weight": "base.pth", "config": {"arm": "b3", "rda": false, "steps": 3200, "batch_size": 16}},
+    "RankUp-Full-v2": {"protocol": "formal15", "version": "v2", "run_template": "Semi-Supervised-Regression-rankup-m1/outputs/rankup_m1_v2/off_b3rdav2_seed{s}_fold{f}", "score": "sup96/oof_predictions.parquet", "weight": "base.pth", "config": {"arm": "b3", "rda": true, "steps": 3200, "batch_size": 16}}
+  },
+  "summary_only": {"S-v1": {"protocol": "three_seed_summary", "source": "M1_BASELINE_V2_3SEED.csv", "row": "S_v1,mean", "mae": 0.18079995612303415}},
+  "weight": "readout.pth"
+}

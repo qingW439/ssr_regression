@@ -1,84 +1,88 @@
-"""Formal 15-fold table for HDT-M and all compared models (unified metric code)."""
+"""Registry-driven OOF table. Formal and development protocols are separate."""
+import argparse
 import json
+import os
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from scipy.stats import spearmanr
+
+REPO = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO / 'tools'))
+from check_status import REGISTRY, check, ccc, manifest_holdout, unique_ids  # noqa: E402
 
 
 def main():
-    P = Path('/root/autodl-tmp/rankup_project')
-    DIMS = ('V', 'A', 'D')
-    PATHS = {'U0': 'm1_uul_runs/U0_s{s}_f{f}', 'U1': 'm1_uul_runs/U1_s{s}_f{f}',
-             'HPL': 'm1_hpl_runs/HPL_s{s}_f{f}', 'RCUS': 'm1_rcus_runs/RCUS2_s{s}_f{f}',
-             'HS': 'm1_hist_runs/hs_s{s}_f{f}', 'HU': 'm1_hist_runs/hu_s{s}_f{f}',
-             'HDTM': 'm1_hdt_runs/hdtm_s{s}_f{f}'}
-
-
-    def ccc(y, p):
-        my, mp = y.mean(), p.mean()
-        return float(2 * ((y - my) * (p - mp)).mean() / (y.var() + p.var() + (my - mp) ** 2 + 1e-12))
-
-
-    def met(d):
-        per = {}
-        for x in DIMS:
-            y, p = d[f'y_{x}'].to_numpy(), d[f'raw_{x}'].to_numpy()
-            q = np.quantile(y, [0.2, 0.8])
-            tail = (y < q[0]) | (y > q[1])
-            per[x] = {'mae': float(np.abs(y - p).mean() * 4), 'ccc': ccc(y, p),
-                      'pearson': float(np.corrcoef(y, p)[0, 1]),
-                      'srcc': float(spearmanr(y, p).statistic),
-                      'r2': float(1 - ((y - p) ** 2).sum() / ((y - y.mean()) ** 2).sum()),
-                      'tail_mae': float(np.abs(y[tail] - p[tail]).mean() * 4),
-                      'sd_ratio': float(p.std() / y.std()),
-                      'mid_mae': float(np.abs(y[~tail] - p[~tail]).mean() * 4)}
-        return {'mae': float(np.mean([v['mae'] for v in per.values()])),
-                'ccc': float(np.mean([v['ccc'] for v in per.values()])),
-                'pearson': float(np.mean([v['pearson'] for v in per.values()])),
-                'srcc': float(np.mean([v['srcc'] for v in per.values()])),
-                'r2': float(np.mean([v['r2'] for v in per.values()])),
-                'tail_mae': float(np.mean([v['tail_mae'] for v in per.values()])),
-                'mid_mae': float(np.mean([v['mid_mae'] for v in per.values()])),
-                'sd_ratio': float(np.mean([v['sd_ratio'] for v in per.values()])),
-                'per_dim': per}
-
-
-    rows = []
-    for s in range(3):
-        for f in range(5):
-            for arm, pat in PATHS.items():
-                oof = P / pat.format(s=s, f=f) / 'oof_predictions.parquet'
-                if not oof.is_file():
-                    print('MISSING', arm, s, f)
-                    continue
-                m = met(pd.read_parquet(oof))
-                rows.append({'arm': arm, 'seed': s, 'fold': f,
-                             **{k: m[k] for k in ('mae', 'ccc', 'pearson', 'srcc', 'r2', 'tail_mae', 'mid_mae', 'sd_ratio')},
-                             **{f'{x}_mae': m['per_dim'][x]['mae'] for x in DIMS},
-                             **{f'{x}_ccc': m['per_dim'][x]['ccc'] for x in DIMS}})
-    df = pd.DataFrame(rows)
-    df.to_csv(P / 'm1_hdt_gate/formal15.csv', index=False)
-    cols = ['mae', 'ccc', 'pearson', 'srcc', 'r2', 'tail_mae', 'mid_mae', 'sd_ratio']
-    g = df.groupby('arm')[cols].mean().round(6)
-    print(g.to_string())
-    print('\nn per arm:', df.groupby('arm').size().to_dict())
-    print('\nper seed MAE\n', df.pivot_table(index='arm', columns='seed', values='mae').round(6).to_string())
-
-    piv = {k: df.pivot(index=['seed', 'fold'], columns='arm', values=k) for k in ('mae', 'ccc', 'tail_mae')}
-    summary = {'means': g.to_dict(), 'n': df.groupby('arm').size().to_dict()}
-    for b in ('U0', 'U1', 'HPL', 'RCUS', 'HS', 'HU'):
-        if 'HDTM' in piv['mae'].columns and b in piv['mae'].columns:
-            dm = (piv['mae']['HDTM'] - piv['mae'][b]).dropna()
-            dc = (piv['ccc']['HDTM'] - piv['ccc'][b]).dropna()
-            dt = (piv['tail_mae']['HDTM'] - piv['tail_mae'][b]).dropna()
-            summary[f'HDTM_minus_{b}'] = {'n': int(len(dm)), 'dmae': float(dm.mean()),
-                                           'dmae_se': float(dm.std(ddof=1) / np.sqrt(len(dm))),
-                                           'dccc': float(dc.mean()), 'dtail': float(dt.mean()),
-                                           'wins': int((dm < 0).sum()), 'losses': int((dm > 0).sum())}
-    (P / 'm1_hdt_gate/formal15_summary.json').write_text(json.dumps(summary, indent=2) + '\n')
-    print(json.dumps({k: v for k, v in summary.items() if k not in ('means',)}, indent=2)[:3500])
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--protocol', choices=REGISTRY['protocol_units'], default='formal15')
+    ap.add_argument('--version', default='historical')
+    ap.add_argument('--out', type=Path)
+    args = ap.parse_args()
+    assets = Path(os.environ.get('SSR_ASSETS', '/root/autodl-tmp/rankup_project'))
+    rows, failures = [], []
+    for name, model in REGISTRY['models'].items():
+        if model['protocol'] != args.protocol:
+            continue
+        for seed, fold in REGISTRY['protocol_units'][args.protocol]:
+            pattern = model['historical'] if args.version == 'historical' else REGISTRY['new_run_template']
+            run = assets / pattern.format(version=args.version, model=name, s=seed, f=fold)
+            result = check(run, expected=model, seed=seed, fold=fold, teacher_guard=False, load_weight=False)
+            if not result['METRICS_VERIFIED']:
+                failures.append(f'{name} s{seed} f{fold}: {result["notes"]}')
+                continue
+            d = pd.read_parquet(run / 'oof_predictions.parquet')
+            per = {}
+            for axis in ('V', 'A', 'D'):
+                y, p = d[f'y_{axis}'].to_numpy(), d[f'raw_{axis}'].to_numpy()
+                q = np.quantile(y, [0.2, 0.8])
+                tail = (y < q[0]) | (y > q[1])
+                per[axis] = {'mae': float(np.abs(y - p).mean() * 4), 'ccc': ccc(y, p),
+                             'tail_mae': float(np.abs(y[tail] - p[tail]).mean() * 4)}
+            rows.append({'model': name, 'protocol': args.protocol, 'version': args.version,
+                         'seed': seed, 'fold': fold, 'metrics_verified': True,
+                         'weight_present': (run / 'readout.pth').is_file(),
+                         **{k: float(np.mean([x[k] for x in per.values()])) for k in ('mae', 'ccc', 'tail_mae')}})
+    if args.protocol == 'formal15' and args.version == 'historical':
+        for name, spec in REGISTRY['rankup'].items():
+            for seed, fold in REGISTRY['protocol_units']['formal15']:
+                run = assets / spec['run_template'].format(s=seed, f=fold)
+                try:
+                    config = json.loads((run / 'run_config.json').read_text())
+                    if config['data_seed'] != seed or config['fold'] != fold:
+                        raise ValueError('seed/fold mismatch')
+                    for key, value in spec['config'].items():
+                        if config.get(key) != value:
+                            raise ValueError(f'config {key} mismatch')
+                    d = pd.read_parquet(run / spec['score'])
+                    ids = unique_ids(d['id'])
+                    if len(ids) != len(manifest_holdout(seed, fold)) or set(ids) != manifest_holdout(seed, fold):
+                        raise ValueError('fold IDs mismatch')
+                    numeric = d[[f'{part}_{axis}' for part in ('y', 'raw') for axis in ('V', 'A', 'D')]].to_numpy()
+                    if not np.isfinite(numeric).all():
+                        raise ValueError('nonfinite OOF')
+                    per = {}
+                    for axis in ('V', 'A', 'D'):
+                        y, p = d[f'y_{axis}'].to_numpy(), d[f'raw_{axis}'].to_numpy()
+                        q = np.quantile(y, [0.2, 0.8])
+                        tail = (y < q[0]) | (y > q[1])
+                        per[axis] = {'mae': float(np.abs(y - p).mean() * 4), 'ccc': ccc(y, p),
+                                     'tail_mae': float(np.abs(y[tail] - p[tail]).mean() * 4)}
+                    rows.append({'model': name, 'protocol': args.protocol, 'version': spec['version'],
+                                 'seed': seed, 'fold': fold, 'metrics_verified': True,
+                                 'weight_present': (run / spec['weight']).is_file(),
+                                 **{k: float(np.mean([x[k] for x in per.values()])) for k in ('mae', 'ccc', 'tail_mae')}})
+                except (OSError, KeyError, ValueError, TypeError) as exc:
+                    failures.append(f'{name} s{seed} f{fold}: {exc}')
+    if failures:
+        print('\n'.join(failures), file=sys.stderr)
+        raise SystemExit(f'{len(failures)} expected units failed validation')
+    out = args.out or assets / f'm1_runs_unified/{args.version}/evaluation/{args.protocol}.csv'
+    out.parent.mkdir(parents=True, exist_ok=True)
+    frame = pd.DataFrame(rows)
+    frame.to_csv(out, index=False)
+    print(frame.groupby('model')[['mae', 'ccc', 'tail_mae']].mean().round(6).to_string())
+    print(json.dumps({'protocol': args.protocol, 'units_per_model': frame.groupby('model').size().to_dict(), 'out': str(out)}))
 
 
 if __name__ == '__main__':

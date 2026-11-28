@@ -2,16 +2,22 @@
 # Unified baseline entrypoint (wq-main). All code comes from src/, assets from $SSR_ASSETS.
 # Usage: bash scripts/run_baseline.sh <arm> <seed> <fold>
 # arms: U0 | U1 | THS | H-S | H-U | C-S | C-U | HPL | RCUS | AAN | SUP6 | UUL6 | HDT-D | HDT-M
-set -u
+set -euo pipefail
 ARM=${1:?arm}; SEED=${2:?seed}; FOLD=${3:?fold}
 REPO=$(cd "$(dirname "$0")/.." && pwd)
 PY=${PY:-/root/autodl-tmp/rankup_project/envs/rankup/bin/python}
 export SSR_ASSETS=${SSR_ASSETS:-/root/autodl-tmp/rankup_project}
 A=$SSR_ASSETS
-RUNS=$A/m1_runs_unified; mkdir -p "$RUNS"
-OUT=$RUNS/${ARM}_s${SEED}_f${FOLD}
-LOG=$RUNS/${ARM}_s${SEED}_f${FOLD}.log
+VERSION=${SSR_RUN_VERSION:-v0.1.2-hdtm-ready}
+RUNS=$A/m1_runs_unified/$VERSION; mkdir -p "$RUNS"
+MODEL=$ARM
+if [ "$ARM" = THS ]; then MODEL=T-HS; fi
+OUT=$RUNS/${MODEL}_s${SEED}_f${FOLD}
+LOG=$RUNS/${MODEL}_s${SEED}_f${FOLD}.log
 echo "=== $(date) $ARM s$SEED f$FOLD" | tee -a "$LOG"
+if [ "$ARM" = HDT-M ] || [ "$ARM" = HDT-D ]; then
+  "$PY" "$REPO/tools/check_teacher_cache.py" "$SEED" "$FOLD" --fused
+fi
 
 case "$ARM" in
   U0)   "$PY" "$REPO/src/baselines/train_uul.py" --arm off --seed "$SEED" --fold "$FOLD" \
@@ -40,5 +46,5 @@ case "$ARM" in
 esac
 rc=$?
 if [ $rc -ne 0 ]; then echo "FAILED rc=$rc" | tee -a "$LOG"; exit 2; fi
-"$PY" "$REPO/tools/check_status.py" --runs "$OUT" --recompute 2>&1 | tail -3
+"$PY" "$REPO/tools/check_status.py" --experiment "$MODEL" --version "$VERSION" --seed "$SEED" --fold "$FOLD" --recompute
 echo "=== $(date) $ARM s$SEED f$FOLD DONE" | tee -a "$LOG"

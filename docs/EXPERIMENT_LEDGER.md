@@ -75,7 +75,7 @@ Teacher gain: scalar student 0.004125, distribution student 0.001836 → **inter
 
 ## Efficiency / other controls
 
-- UUL-6 (6 unlabelled batches per step): 0.180128 MAE / 0.411744 CCC (15 folds) — efficiency study.
+- UUL-6 (6-layer encoder, semi-supervised): 0.180128 MAE / 0.411744 CCC (15 folds) — depth/efficiency study.
 - SUP-6: 0.187393 / 0.397537.
 
 
@@ -84,7 +84,7 @@ Teacher gain: scalar student 0.004125, distribution student 0.001836 → **inter
 | model | MAE | CCC | units | note |
 | --- | --- | --- | --- | --- |
 | AAN (3-D adaptation) | 0.188113 | 0.482730 | 15 formal | weights deleted in cleanup; metrics recomputed from OOF |
-| S (strong supervised scalar) | ~0.1806 | — | 3 seeds (reported) | `M1_BASELINE_V2_3SEED.csv`, not in 15-fold table |
+| S_v1 (strong supervised scalar) | 0.180800 | — | 3 seed summaries | `M1_BASELINE_V2_3SEED.csv` mean row; distinct protocol |
 | SUP-6 (6-layer, supervised) | 0.187393 | 0.397537 | 15 formal | weights deleted; metrics recomputed |
 | UUL-6 (6-layer, semi-supervised) | 0.180128 | 0.411744 | 15 formal | weights deleted; metrics recomputed |
 
@@ -95,11 +95,14 @@ not "six unlabelled batches per step". The earlier description was wrong and is 
 
 | source | metric | value | protocol |
 | --- | --- | --- | --- |
-| RankUp-3D v2 | MAE | 0.186333 | reported, 3 seeds × 5 folds, different aggregation |
+| RankUp-3D v2 | MAE | 0.186333 | 3 seeds × 5 folds; recomputed from `off_b3v2_*/sup96/oof_predictions.parquet`, fold IDs verified |
+| RankUp Full v2 (RDA) | MAE | 0.185048 | 3 seeds × 5 folds; recomputed from `off_b3rdav2_*/sup96/oof_predictions.parquet`, same aggregation |
 | RankUp "raw" | MAE / CCC | 0.181740 / 0.426728 | nested OOF on 500 samples (`outputs/oof/oof_metrics.json`) |
 
 ## Teacher → student correlation (correct phrasing)
 
-Pearson(teacher_holdout_MAE, student_MAE) = **−0.636** across the 15 outer units: a *lower* teacher
-MAE goes with a *lower* student MAE; the negative sign is due to both variables being errors
-(smaller is better), not evidence of a trade-off.
+Pearson(teacher_holdout_MAE, student_MAE) = **−0.636** across the 15 outer units. Algebraically,
+higher teacher error is associated with lower student error in this sample. This observational
+correlation does not establish that worsening a teacher helps the student; fold difficulty,
+selection effects and other confounders remain possible. The earlier same-direction interpretation
+was incorrect.
