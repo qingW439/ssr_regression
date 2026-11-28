@@ -116,7 +116,7 @@ def predict_texts(model, texts, tok, dev, bs=64):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--arm', choices=('hdtm', 'hdtd'), required=True)
+    ap.add_argument('--arm', choices=('hdtm', 'hdtd', 'acl'), required=True)
     ap.add_argument('--seed', type=int, required=True)
     ap.add_argument('--fold', type=int, required=True)
     ap.add_argument('--fused', type=Path, required=True)
@@ -188,6 +188,9 @@ def main():
         if a.arm == 'hdtm':
             t_u = gaussian_target(q_val[idx.to(dev)])
             l_u = -(t_u * F.log_softmax(logits_u, dim=-1)).sum(-1).mean()
+        elif a.arm == 'acl':
+            # A-CL: labelled CE + unlabeled L1 on the decoded continuous values
+            l_u = F.l1_loss(decode_corrected(logits_u), q_val[idx.to(dev)])
         else:
             l_u = -(q_prob[idx.to(dev)] * F.log_softmax(logits_u, dim=-1)).sum(-1).mean()
         loss = ce_s + a.lam * l_u

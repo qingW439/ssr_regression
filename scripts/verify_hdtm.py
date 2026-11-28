@@ -15,7 +15,7 @@ from semilearn.datasets.nlp_datasets.emobank import read_gold  # noqa: E402
 from transformers import AutoTokenizer  # noqa: E402
 
 A = Path(os.environ.get('SSR_ASSETS', '/root/autodl-tmp/rankup_project'))
-dev = torch.device('cpu')
+dev = torch.device('cuda')
 run = A / 'm1_hdt_runs/hdtm_s0_f0'
 ck = torch.load(run / 'readout.pth', map_location='cpu', weights_only=False)
 model = HistVAD().to(dev)
