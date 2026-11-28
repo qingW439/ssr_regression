@@ -1,0 +1,18 @@
+model,units,with_oof,with_result,with_readout,mae_from_oof,ccc_from_oof,status
+S,0,0,0,0,,,unknown
+RankUp-3D-v2,0,0,0,0,,,unknown
+RankUp-Full-v2,0,0,0,0,,,unknown
+AAN,30,15,15,0,0.188113,0.48273,metrics-only (weights missing)
+U0,30,15,15,15,0.180315,0.416833,ok
+U1,30,15,15,15,0.17813,0.41451,ok
+HPL,30,15,15,15,0.177314,0.433869,ok
+RCUS,0,0,0,0,,,unknown
+H-S,30,15,15,15,0.175208,0.470203,ok
+H-U,30,15,15,15,0.17491,0.429681,ok
+C-S,6,3,3,3,0.174036,0.418093,ok
+C-U,6,3,3,3,0.176501,0.396894,ok
+T-HS,6,3,3,3,0.173546,0.422919,ok
+HDT-D,6,3,3,3,0.173016,0.445523,ok
+SUP-6,30,15,15,0,0.187393,0.397537,metrics-only (weights missing)
+UUL-6,30,15,15,0,0.180128,0.411744,metrics-only (weights missing)
+HDT-M,30,15,15,15,0.173036,0.465931,ok

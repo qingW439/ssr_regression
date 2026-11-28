@@ -1,13 +1,16 @@
 """Fuse the four distribution teachers for one fold (formal pipeline)."""
 import json
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 import torch
 
-ROOT = Path('/root/autodl-tmp/rankup_project')
-sys.path.insert(0, str(ROOT / 'm1_hist_gate'))
+REPO = Path(__file__).resolve().parents[2]
+ASSETS = Path(os.environ.get('SSR_ASSETS', '/root/autodl-tmp/rankup_project'))
+ROOT = ASSETS
+sys.path.insert(0, str(REPO / 'src/hdtm'))
 from hist_loss import decode_corrected  # noqa: E402
 
 P = ROOT

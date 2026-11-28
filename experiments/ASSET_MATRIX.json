@@ -1,0 +1,172 @@
+[
+  {
+    "model": "S",
+    "units": 0,
+    "with_oof": 0,
+    "with_result": 0,
+    "with_readout": 0,
+    "mae_from_oof": null,
+    "ccc_from_oof": null,
+    "status": "unknown"
+  },
+  {
+    "model": "RankUp-3D-v2",
+    "units": 0,
+    "with_oof": 0,
+    "with_result": 0,
+    "with_readout": 0,
+    "mae_from_oof": null,
+    "ccc_from_oof": null,
+    "status": "unknown"
+  },
+  {
+    "model": "RankUp-Full-v2",
+    "units": 0,
+    "with_oof": 0,
+    "with_result": 0,
+    "with_readout": 0,
+    "mae_from_oof": null,
+    "ccc_from_oof": null,
+    "status": "unknown"
+  },
+  {
+    "model": "AAN",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 0,
+    "mae_from_oof": 0.188113,
+    "ccc_from_oof": 0.48273,
+    "status": "metrics-only (weights missing)"
+  },
+  {
+    "model": "U0",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 15,
+    "mae_from_oof": 0.180315,
+    "ccc_from_oof": 0.416833,
+    "status": "ok"
+  },
+  {
+    "model": "U1",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 15,
+    "mae_from_oof": 0.17813,
+    "ccc_from_oof": 0.41451,
+    "status": "ok"
+  },
+  {
+    "model": "HPL",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 15,
+    "mae_from_oof": 0.177314,
+    "ccc_from_oof": 0.433869,
+    "status": "ok"
+  },
+  {
+    "model": "RCUS",
+    "units": 0,
+    "with_oof": 0,
+    "with_result": 0,
+    "with_readout": 0,
+    "mae_from_oof": null,
+    "ccc_from_oof": null,
+    "status": "unknown"
+  },
+  {
+    "model": "H-S",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 15,
+    "mae_from_oof": 0.175208,
+    "ccc_from_oof": 0.470203,
+    "status": "ok"
+  },
+  {
+    "model": "H-U",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 15,
+    "mae_from_oof": 0.17491,
+    "ccc_from_oof": 0.429681,
+    "status": "ok"
+  },
+  {
+    "model": "C-S",
+    "units": 6,
+    "with_oof": 3,
+    "with_result": 3,
+    "with_readout": 3,
+    "mae_from_oof": 0.174036,
+    "ccc_from_oof": 0.418093,
+    "status": "ok"
+  },
+  {
+    "model": "C-U",
+    "units": 6,
+    "with_oof": 3,
+    "with_result": 3,
+    "with_readout": 3,
+    "mae_from_oof": 0.176501,
+    "ccc_from_oof": 0.396894,
+    "status": "ok"
+  },
+  {
+    "model": "T-HS",
+    "units": 6,
+    "with_oof": 3,
+    "with_result": 3,
+    "with_readout": 3,
+    "mae_from_oof": 0.173546,
+    "ccc_from_oof": 0.422919,
+    "status": "ok"
+  },
+  {
+    "model": "HDT-D",
+    "units": 6,
+    "with_oof": 3,
+    "with_result": 3,
+    "with_readout": 3,
+    "mae_from_oof": 0.173016,
+    "ccc_from_oof": 0.445523,
+    "status": "ok"
+  },
+  {
+    "model": "SUP-6",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 0,
+    "mae_from_oof": 0.187393,
+    "ccc_from_oof": 0.397537,
+    "status": "metrics-only (weights missing)"
+  },
+  {
+    "model": "UUL-6",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 0,
+    "mae_from_oof": 0.180128,
+    "ccc_from_oof": 0.411744,
+    "status": "metrics-only (weights missing)"
+  },
+  {
+    "model": "HDT-M",
+    "units": 30,
+    "with_oof": 15,
+    "with_result": 15,
+    "with_readout": 15,
+    "mae_from_oof": 0.173036,
+    "ccc_from_oof": 0.465931,
+    "status": "ok"
+  }
+]

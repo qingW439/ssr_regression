@@ -8,6 +8,7 @@ predicting holdout / query / unlabeled exactly like m1_v2/xfit_predict.py.
 """
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -18,9 +19,11 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
 
-ROOT = Path('/root/autodl-tmp/rankup_project')
-sys.path.insert(0, str(ROOT / 'Semi-Supervised-Regression-comp2'))
-sys.path.insert(0, str(ROOT / 'm1_hist_gate'))
+REPO = Path(__file__).resolve().parents[2]
+ASSETS = Path(os.environ.get('SSR_ASSETS', '/root/autodl-tmp/rankup_project'))
+ROOT = ASSETS
+sys.path.insert(0, str(REPO))
+sys.path.insert(0, str(REPO / 'src/hdtm'))
 from semilearn.datasets.nlp_datasets.emobank import GoldData, TextCollator, read_gold  # noqa: E402
 from scripts.vad_research.train_roberta_vad_supervised import RobertaVADRegressor, set_seed  # noqa: E402
 from hist_loss import K, HistHead, decode_corrected, hist_loss  # noqa: E402

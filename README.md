@@ -22,25 +22,25 @@ archive/extracted/ historical text records from the consolidated branches
 semilearn/         baseline framework (RankUp reproduction, unchanged)
 ```
 
-## Reproduce (server paths)
+## Run
 
 ```
-# 1. teachers for one outer unit (4 teachers, same cross-fit split as the scalar teachers)
-python src/hdtm/train_teacher_hist.py --seed 0 --fold 0 --j 0 --out teachers/B_s0_f0_j0.npz
+export SSR_ASSETS=/root/autodl-tmp/rankup_project   # data / weights / caches live here
 
-# 2. fuse teacher probabilities -> continuous pseudo labels
-python src/hdtm/make_fused_fold.py 0 0
+# any compared model, one unit
+bash scripts/run_baseline.sh HDT-M 0 0
+bash scripts/run_baseline.sh U1 0 0          # U0, U1, THS, H-S, H-U, C-S, C-U,
+                                             # HPL, RCUS, AAN, SUP6, UUL6, HDT-D
 
-# 3. student (HDT-M)
-python src/hdtm/train_hdt.py --arm hdtm --seed 0 --fold 0 \
-  --fused m1_hdt_gate/fused/B_s0_f0.npz --out-dir m1_hdt_runs/hdtm_s0_f0
-
-# 4. full 15-fold queue (resume-safe)
+# HDT-M full 15 folds (teachers -> fused targets -> student), resume-safe
 bash scripts/hdtm_run_formal.sh
+
+# completion check (weights + result + OOF ids + config + teacher caches)
+python tools/check_status.py --runs "$SSR_ASSETS/m1_hdt_runs/hdtm_s*_f*" --recompute --teacher-guard
 ```
 
-Data, weights and teacher caches stay outside git; see `docs/ASSET_MANIFEST.json` for their
-server locations and hashes.
+All model code is imported from `src/`; the old `m1_*_gate` directories are historical copies and are
+never used by the entrypoints. See `docs/SOURCE_MAP.md` for model → source → origin.
 
 ## Baselines
 

@@ -77,3 +77,29 @@ Teacher gain: scalar student 0.004125, distribution student 0.001836 → **inter
 
 - UUL-6 (6 unlabelled batches per step): 0.180128 MAE / 0.411744 CCC (15 folds) — efficiency study.
 - SUP-6: 0.187393 / 0.397537.
+
+
+## Additional models (restored 2026-11-28)
+
+| model | MAE | CCC | units | note |
+| --- | --- | --- | --- | --- |
+| AAN (3-D adaptation) | 0.188113 | 0.482730 | 15 formal | weights deleted in cleanup; metrics recomputed from OOF |
+| S (strong supervised scalar) | ~0.1806 | — | 3 seeds (reported) | `M1_BASELINE_V2_3SEED.csv`, not in 15-fold table |
+| SUP-6 (6-layer, supervised) | 0.187393 | 0.397537 | 15 formal | weights deleted; metrics recomputed |
+| UUL-6 (6-layer, semi-supervised) | 0.180128 | 0.411744 | 15 formal | weights deleted; metrics recomputed |
+
+**UUL-6 naming**: UUL-6 is a **6-layer encoder** semi-supervised model (depth/efficiency study),
+not "six unlabelled batches per step". The earlier description was wrong and is retired.
+
+## Different-protocol results (not mixed into the 15-fold table)
+
+| source | metric | value | protocol |
+| --- | --- | --- | --- |
+| RankUp-3D v2 | MAE | 0.186333 | reported, 3 seeds × 5 folds, different aggregation |
+| RankUp "raw" | MAE / CCC | 0.181740 / 0.426728 | nested OOF on 500 samples (`outputs/oof/oof_metrics.json`) |
+
+## Teacher → student correlation (correct phrasing)
+
+Pearson(teacher_holdout_MAE, student_MAE) = **−0.636** across the 15 outer units: a *lower* teacher
+MAE goes with a *lower* student MAE; the negative sign is due to both variables being errors
+(smaller is better), not evidence of a trade-off.

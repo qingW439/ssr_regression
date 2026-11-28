@@ -33,3 +33,20 @@ Not started. Requires new data; DEV/TEST of EmoBank remain untouched.
 - One long-lived branch `wq-main`; no per-experiment branches.
 - Every improvement: source change → validation → config → ledger → commit → tag on major versions.
 - Never access EmoBank DEV/TEST; never fit weights/calibration on outer holdout labels.
+
+
+## History preserved (do not erase)
+
+- HPL-3D (weak/strong consistency with learned uncertainty, bilevel `higher`) was implemented and
+  formally evaluated (15 folds, 0.177314 / 0.433869).
+- A mean-teacher component was used in earlier M1 work (`P1_v2 + mean-teacher raw + edit_V`);
+  EMA teachers are therefore *explored history*, not an untouched idea.
+- JACF / RDA / UVR experiments and reports are archived in `archive/extracted/` and the bundle.
+
+## Known asset gaps (2026-11-28 audit)
+
+| asset | state |
+| --- | --- |
+| AAN, SUP-6, UUL-6 readout weights | deleted during consolidation; OOF + result.json kept, metrics reproducible, inference needs retraining |
+| RankUp-3D v2 15-fold OOF | not present; only reported numbers |
+| P1 study weights (`m1_p1_runs`) | removed earlier (result.json only, superseded) |

@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v0.1.1-hdtm-repro — 2026-11-28
+
+- Restored baseline implementations into the repo: U0/U1/T-HS (`src/baselines/train_uul.py`),
+  H-S/H-U/C-S/C-U (`train_hist.py`), HPL (`train_hpl.py`), RCUS (`train_rcus.py` + `rcus_loss.py`),
+  SUP-6/UUL-6 (`train_shallow.py`), AAN (`train_aan.py`), RankUp-3D/Full (`train_rankup.py`).
+- Removed the dependency on old project directories: entrypoints now import from `src/` only,
+  assets are resolved through `SSR_ASSETS` (`src/common/paths.py`).
+- Added `tools/check_status.py`: completion requires weights + result + OOF + id match + config
+  (+ teacher caches/fused target for HDT-M); incomplete runs are reported, not silently accepted.
+- Added `scripts/run_baseline.sh` and rewrote `scripts/hdtm_*.sh` to call repo code.
+- Audit of the consolidation cleanup: AAN / SUP-6 / UUL-6 readout weights were deleted
+  (OOF + result.json kept; metrics reproducible, inference needs retraining). RankUp-3D v2 15-fold
+  OOF was never in the tree. Recorded in `docs/RESEARCH_ROADMAP.md`.
+- Fixed documentation: UUL-6 is a 6-layer model; teacher–student correlation sign explained;
+  baseline README rewritten as a real comparison document; source/version map added.
+
 ## v0.1.0-hdtm — 2026-11-28
 
 First consolidated research baseline.
