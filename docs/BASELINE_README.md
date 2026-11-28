@@ -78,7 +78,7 @@ New run dirs go to `$SSR_ASSETS/m1_runs_unified/v0.1.2-hdtm-ready/`. A run only 
 
 | asset | state |
 | --- | --- |
-| AAN, SUP-6, UUL-6 readout weights | deleted in consolidation; OOF+result kept, retraining needed for inference |
+| AAN, SUP-6, UUL-6 readout weights | all 45 restored 2026-11-28; paths, sizes and SHA256 recorded in `docs/ASSET_MANIFEST.json`. Their pre-readout `base.pth` files remain on the preserved second host. |
 | P1 studies (`m1_p1_runs`) | result.json only, no OOF; superseded |
 
 ## Current host capacity and replay

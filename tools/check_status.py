@@ -132,7 +132,7 @@ def check(run, recompute=False, expected=None, seed=None, fold=None, teacher_gua
         try:
             if load_weight:
                 import torch
-                state = torch.load(weight, map_location='cpu', weights_only=True)
+                state = torch.load(weight, map_location='cpu', weights_only=True, mmap=True)
                 if not isinstance(state, dict) or not state:
                     raise ValueError('invalid state dict')
                 report['INFERENCE_READY'] = True

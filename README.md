@@ -46,7 +46,8 @@ never used by the entrypoints. See `docs/SOURCE_MAP.md` for model → source →
 The experiment registry is `experiments/registry.json`. `METRICS_VERIFIED` means the complete OOF
 matches its fold manifest and stored metrics; `INFERENCE_READY` means a loadable readout checkpoint;
 `RUN_COMPLETE` requires both plus a valid configuration and, for HDT-M, valid teacher caches.
-Historical AAN, SUP6 and UUL6 may have verified metrics while lacking inference weights.
+AAN, SUP6 and UUL6 each have 15 verified OOF results and restored readout weights
+(recovered 2026-11-28; see `docs/ASSET_MANIFEST.json`).
 Use `--metrics-only` when auditing historical metrics. `SSR_RUN_VERSION` selects the new output
 directory under `$SSR_ASSETS/m1_runs_unified/`.
 

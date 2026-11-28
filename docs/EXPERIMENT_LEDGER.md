@@ -83,10 +83,10 @@ Teacher gain: scalar student 0.004125, distribution student 0.001836 → **inter
 
 | model | MAE | CCC | units | note |
 | --- | --- | --- | --- | --- |
-| AAN (3-D adaptation) | 0.188113 | 0.482730 | 15 formal | weights deleted in cleanup; metrics recomputed from OOF |
+| AAN (3-D adaptation) | 0.188113 | 0.482730 | 15 formal | 15 readout weights restored and verified 2026-11-28 |
 | S_v1 (strong supervised scalar) | 0.180800 | — | 3 seed summaries | `M1_BASELINE_V2_3SEED.csv` mean row; distinct protocol |
-| SUP-6 (6-layer, supervised) | 0.187393 | 0.397537 | 15 formal | weights deleted; metrics recomputed |
-| UUL-6 (6-layer, semi-supervised) | 0.180128 | 0.411744 | 15 formal | weights deleted; metrics recomputed |
+| SUP-6 (6-layer, supervised) | 0.187393 | 0.397537 | 15 formal | 15 readout weights restored and verified 2026-11-28 |
+| UUL-6 (6-layer, semi-supervised) | 0.180128 | 0.411744 | 15 formal | 15 readout weights restored and verified 2026-11-28 |
 
 **UUL-6 naming**: UUL-6 is a **6-layer encoder** semi-supervised model (depth/efficiency study),
 not "six unlabelled batches per step". The earlier description was wrong and is retired.
