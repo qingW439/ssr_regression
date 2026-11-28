@@ -1,0 +1,23 @@
+{
+  "name": "hdtm_student",
+  "role": "semi-supervised distribution-regression student",
+  "encoder": "roberta-base (UVR-SimCSE init)",
+  "head": "HistHead 768 -> 3x20",
+  "sup_loss": "histogram CE on gaussian_target(labels)",
+  "ulb_loss": "histogram CE on gaussian_target(decode(fused teacher probabilities))",
+  "lambda_ulb": 0.25,
+  "steps": 3200,
+  "batch_size": 16,
+  "lr": 1e-05,
+  "weight_decay": 0.0005,
+  "layer_decay": 0.75,
+  "readout_steps": 96,
+  "readout_lr": 5e-06,
+  "readout_wd": 0.01,
+  "labels_per_fold": 400,
+  "holdout_per_fold": 100,
+  "seeds": [0, 1, 2],
+  "folds": [0, 1, 2, 3, 4],
+  "decoding": "decode_corrected (expectation + target-derived inverse LUT)",
+  "inference": "single student forward"
+}

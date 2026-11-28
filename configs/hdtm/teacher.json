@@ -1,0 +1,19 @@
+{
+  "name": "hdtm_teacher",
+  "role": "distribution-regression cross-fit teacher",
+  "encoder": "roberta-base (UVR-SimCSE init)",
+  "head": "HistHead 768 -> 3x20",
+  "target": "gaussian_target(sigma=1/20, boundary reflection)",
+  "loss": "histogram CE",
+  "steps": 3200,
+  "batch_size": 16,
+  "lr": 1e-05,
+  "weight_decay": 0.0005,
+  "layer_decay": 0.75,
+  "readout_steps": 96,
+  "readout_lr": 5e-06,
+  "readout_wd": 0.01,
+  "labels_per_teacher": 298,
+  "splits": "m1_v2_assets/splits/B_s{seed}_f{fold}/split.json (group j holdout excluded)",
+  "frozen_after_training": true
+}
