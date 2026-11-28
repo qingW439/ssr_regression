@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## v0.1.2-asset-recovery — 2026-11-28
+
+- Audited the 449 deleted weight files: U0/U1, H-S/H-U, C-S/C-U, T-HS, HDT-D lost only their
+  pre-readout `base.pth` (readouts kept); **AAN, SUP-6 and UUL-6 lost their final `readout.pth`**.
+- Located a preserved copy of all three sets on the second server instance and restored the
+  45 `readout.pth` files (AAN 15, SUP-6 15, UUL-6 15). All 45 file sizes match the source;
+  6 sampled sha256 are byte-identical; `docs/ASSET_MANIFEST.json` lists them with hashes.
+- Freed space for the restore by removing the already-closed `dedit` (token-edit) weights
+  (30 files, 14.0 GiB; result/OOF kept) — no valid model was touched.
+- AAN / SUP-6 / UUL-6 are marked as **valid formal experiments**, not failures.
+
 ## v0.1.1-hdtm-repro — 2026-11-28
 
 - Restored baseline implementations into the repo: U0/U1/T-HS (`src/baselines/train_uul.py`),

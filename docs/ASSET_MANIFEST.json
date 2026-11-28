@@ -9,9 +9,10 @@
     "fused_target": 15,
     "git_bundle": 1,
     "hdtm_student": 45,
+    "recovered_readout": 45,
     "scalar_teacher_target": 15
   },
-  "total_bytes": 40812073540,
+  "total_bytes": 58431743380,
   "items": [
     {
       "path": "m1_hdt_runs/hdtm_s0_f0/readout.pth",
@@ -1426,6 +1427,326 @@
       "bytes": 56343361,
       "sha256": "832991095267efa33088d30af6f841f37734c02474f30cd68383d99163eee923",
       "note": "pre-consolidation backup, all refs"
+    },
+    {
+      "path": "m1_aan_runs/aan_s0_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "5b3b32c59c8ec0d24efd2df58eebfc0159f558eaf86e3630e4c8ccd6940a524d",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s0_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "0463c052d2ab8b02ebdd75824a3638ad0ac3bbd9048da123bb954e604b900de7",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s0_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "c80ef2f627f743284b13c4c10ba0544fc7e7f62df47b983b557c9cd6e8770f53",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s0_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "00760afdf008c709b57d7217f01bb77c9926c527ebe3f5bf5a338b7329a95424",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s0_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "f3128beb9d2b3049cf5d6a96622cd186a2774f3d12fa628945988ecb282ce1ef",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s1_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "6e8adb41d7a4c6861eed30eb8361e705720ff25229537cc719e40d51709291f2",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s1_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "61eec732419e34e72fe9a8a3e2120f60010c188b2a256272775d7e0245a4cbc3",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s1_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "406a9ba736ebd3f0414e44d4ee063eedbeb817340ea3e5e5962a55b932e550a4",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s1_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "5b0358b46ce3eaca6ca2695a88a4c91afe0681b555904a492575722031c1e7ca",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s1_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "ca336df7e68b047f9f3e233571c153932761617c3c63b0e367bcdc55723c30c2",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s2_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "3cf284b88400fba6316bbf4a601fdaf95bb0f26f48f9a668c4b221c22cb92caa",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s2_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "5a5525939f4836eac98d976648801e4a03b48e034805484dfa9a6bd69aa980a2",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s2_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "29ad3f573a44967811f1966dee97c71d5798afaf8d09a53f82d224ddeb27c522",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s2_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "0b0668909b48ea351fb52dc9c615b3640b0261f80af0bcb9a55aa3346e500aa9",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_aan_runs/aan_s2_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 512867448,
+      "sha256": "bceb2a4421059987210e775fb3caef665e024a9ca4b58021eec225d90648c856",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s0_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "e7ed2c462f06b5b4f30ad5edb4b9a76b67cece52410b7825d49c2dc9fab22163",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s0_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "5438b8066ef5f8960b3a7ff27d6f8f12290f9fca2767cb86924c3892d880b3e3",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s0_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "184e42f038d2a1cf56915594667154130b90df12625abf4ea235f7d6e3e39ff6",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s0_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "d20821b3ff471e6ea648adf5dfc7ff92d678a127d1c9cc833945b309ad2b8458",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s0_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "b4d60efdc5c4ba2edaa20c05a6f0b530d28ba355468aeb96384fa0db3cbd4b18",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s1_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "975e58b63faf144d3b12616487817b1045b4afed6c18f2ae9f3b47222daca144",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s1_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "767df9bad354998f150c713bdca8349c553ac5a3166ef0962a7ba98caf352737",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s1_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "e72a31f139074404216c635be829e60eb5d162bd4af4451a9dcaffdf10f738f2",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s1_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "6eb4674f241a9c3cd0308048c0f50068cf24a6538f463f2baf1f5ffe78b14dc1",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s1_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "3efa3fa7c02994ac27711f1adc5c8084310fa4f9f36b7862130327115b7a3bb0",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s2_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "c2476a0892982f94618256cfbf3d140d3110923dde53bddf618e7ece79c5319a",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s2_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "3f27448b47ac3451e9de0c6f1486538e4f68960b08f879f7560d44961f708c7e",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s2_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "db8aa3c9c0ce0c9043b20380f73f662408d6a441f6ad82934e41e192dbaa21df",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s2_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "f874240cfc9c4f0e7460f291e19fca20a8bb96e9521c5cc8709c0149aea2eb97",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/sup6_s2_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "29247c6c9772217daaac900a1c3ea2de0311e4077ff2bbfac7d606e553306d2b",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s0_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "6c9b445de36e67e0717b290a41e431fc9a8c192c8c8788e51acd654d30480272",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s0_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "a69d4069ed3e1433e96b0bb3f7660e115d0382c39fd7a43ed32af76d83b23c87",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s0_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "8c001c898ac111878b6cfe9a2775ea32ab2a55dbc80c83aacc3cc770e9e3187b",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s0_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "a5ce854f69b7172ebb02baccbbd7598d75d1b126423a757a70dfc1b81a7f1099",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s0_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "0d51d71b9dc59517cfef95585c799450476e16160d20a5c6a32f7e5d42f042cd",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s1_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "0db309e25a658a740d587ce9fc2bff0c5c86ed498bcc597a10c3392c7372ce10",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s1_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "6c0d852388aab54d027d785997896511767b3a4263d5dec54f64d9ce1df4f9bd",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s1_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "a364e29884607953b2e13aa85fd45fdb2395067441a1a492c2ec69b08b1167a2",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s1_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "ecbcfb2767a7e55e1e96c4acc58260c18481bdf9ba6a81fe6be4f24fd652facf",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s1_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "9929bba555f45beda534d02f1ed1ed41036ea5555953554a0631b0bd60ce734b",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s2_f0/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "08bbcce682d9bb315a35770e0713513361cc1d40627ce3b89d995d97d3c28d30",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s2_f1/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "2c7c18b3bed55a0948c405816c09c1ceb338b0a91e0ac902fcab0e225f921fdd",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s2_f2/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "c51eb28582266629cc3145f31c86c8f551d168121430afd39fce6e30a3a34877",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s2_f3/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "22da589c113b4a6b586508e4b071c0b3a1145d82aab6487b2ee4bb0f015e87c5",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
+    },
+    {
+      "path": "m1_shallow_runs/uul6_s2_f4/readout.pth",
+      "kind": "recovered_readout",
+      "bytes": 330888604,
+      "sha256": "6011955936f03f48dd0358eaf3fd8eeee0f24905ad8c008232a9799cda08b424",
+      "note": "restored 2026-11-28 from the preserved host (2nd instance)"
     }
-  ]
+  ],
+  "recovery": {
+    "date": "2026-11-28",
+    "files": 45,
+    "note": "AAN/SUP-6/UUL-6 readout.pth restored; base.pth of these runs remain only on the preserved host; sizes of all 45 restored files match, 6 sampled sha256 identical."
+  }
 }

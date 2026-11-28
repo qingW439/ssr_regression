@@ -47,6 +47,6 @@ Not started. Requires new data; DEV/TEST of EmoBank remain untouched.
 
 | asset | state |
 | --- | --- |
-| AAN, SUP-6, UUL-6 readout weights | deleted during consolidation; OOF + result.json kept, metrics reproducible, inference needs retraining |
+| AAN, SUP-6, UUL-6 readout weights | **recovered 2026-11-28** from the preserved second host (45 readouts restored, all sizes match, 6 sampled sha256 identical; base.pth of these runs remain only on that host) |
 | RankUp-3D v2 15-fold OOF | not present; only reported numbers |
 | P1 study weights (`m1_p1_runs`) | removed earlier (result.json only, superseded) |
